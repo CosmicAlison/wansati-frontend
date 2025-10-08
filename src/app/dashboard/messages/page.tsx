@@ -1,8 +1,8 @@
 'use client'
 import { Pen } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContexts";
-import SearchBar from "@/components/SearchBar";
-import ChatList from "@/components/ChatList";
+import SearchBar from "@/components/ui/SearchBar";
+import ChatList from "@/components/ui/ChatList";
 import { useChatService } from "@/libs/ChatService";
 import { Suspense } from 'react';
 
