@@ -34,7 +34,7 @@ export type Skill = {
 };
 
 export type User = {
-  id: number;
+  id: string;
   username: string;
   name: string;
   role: string;
@@ -44,6 +44,8 @@ export type User = {
   locked: boolean;
   profileUrl: string;
   createdAt: string;
+  password: string;
+  email: string;
 
   certifications: Certification[];
   educationHistory: Education[];
