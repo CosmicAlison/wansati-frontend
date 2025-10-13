@@ -1,21 +1,20 @@
-'use client';
 
-import { useAuth } from '@/contexts/AuthContexts';
+import {auth} from '../../auth';
 import { get, post } from '@/libs/Api';
 import { Chat } from '@/types/Chat';
 import { redirect } from 'next/navigation';
 
 export function useChatService() {
-  const { user } = useAuth();
 
-  if (!user) redirect("/login");
 
   async function getUserChats(): Promise<Chat[]> {
-    return get<Chat[]>(`/chat/${user?.id}`);
+    const session = await auth();
+    return get<Chat[]>(`/chat/${session?.user?.id}`);
   }
 
   async function createPrivateChat(otherUserId: number): Promise<Chat> {
-    return post<Chat>(`/chat/private?userId1=${user?.id}&userId2=${otherUserId}`, {});
+    const session = await auth();
+    return post<Chat>(`/chat/private?userId1=${session?.user?.id}&userId2=${otherUserId}`, {});
   }
 
   return {

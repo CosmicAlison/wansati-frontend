@@ -1,14 +1,14 @@
-'use client';
-import { useAuth } from '@/contexts/AuthContexts';
+
+
 import { Chat } from '@/types/Chat';
 import { ChatProfilePic } from '@/utils/ChatProfilePic';
 import { formatDate } from '@/utils/FormatDate';
 import { use } from 'react';
+  import { auth } from '../../../auth';
 
-
-export default function ChatList({ chats }: { chats: Promise<Chat[]> }) {
+export default async function ChatList({ chats }: { chats: Promise<Chat[]> }) {
   const chatList = use(chats);
-  const { user, setUser } = useAuth();
+  const session = await auth(); 
   return (
     <div>
         {chatList.map((chat) => (
@@ -16,7 +16,7 @@ export default function ChatList({ chats }: { chats: Promise<Chat[]> }) {
             key={chat.id}
             className="w-full flex items-center gap-4 p-3 hover:bg-[var(--lilac)] transition text-left"
         >
-            <ChatProfilePic chat={chat} currentUserId={user?.id ?? 0} />
+            <ChatProfilePic chat={chat} currentUserId={session?.user?.id ?? ""} />
             <div className="flex-1 min-w-0">
             <div className="flex justify-between items-center">
                 <span className="font-semibold text-[var(--dark-purple)] truncate">{chat.name}</span>

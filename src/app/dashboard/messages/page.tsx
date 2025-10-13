@@ -1,14 +1,14 @@
-'use client'
+
 import { Pen } from "lucide-react";
-import { useAuth } from "@/contexts/AuthContexts";
 import SearchBar from "@/components/ui/SearchBar";
 import ChatList from "@/components/ui/ChatList";
 import { useChatService } from "@/libs/ChatService";
 import { Suspense } from 'react';
+import { auth } from "../../../../auth";
 
-export default function Messages() {
-  const { user, setUser } = useAuth();
+export default async function Messages() {
   const {getUserChats} = useChatService();
+  const session = await auth();
   return (
     <div className="grid h-screen w-full grid-cols-3 gap-0">
       <div>
@@ -25,7 +25,7 @@ export default function Messages() {
       </div>
       <div className="col-span-2 border-l border-[var(--light-grey)] bg-[var(--secondary-bg)]">
         <section>
-          <h1 className="text-[var(--dark-purple)] p-3 text-xl font-bold">Jane</h1>
+          <h1 className="text-[var(--dark-purple)] p-3 text-xl font-bold"></h1>
         </section>
         <section></section>
       </div>

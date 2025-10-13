@@ -1,17 +1,17 @@
-'use client'
+
 
 import { Sparkles, Users, Newspaper } from "lucide-react";
-import { useAuth } from "@/contexts/AuthContexts";
 import { motion } from "framer-motion";
+import { auth } from "../../../auth";
 
-export default function DashboardHome() {
-  const { user } = useAuth();
+export default async function DashboardHome() {
+  const session = await auth();
 
   return (
     <div className="grid h-screen w-full grid-cols-3 gap-0">
       {/* Left section — summary & actions */}
       <div className="p-4 border-r border-[var(--light-grey)] bg-[var(--off-white)]">
-        <h1 className="text-[var(--dark-purple)] text-xl font-bold mb-4">Welcome, {user?.name || 'User'}</h1>
+        <h1 className="text-[var(--dark-purple)] text-xl font-bold mb-4">Welcome, {session?.user?.name || 'User'}</h1>
         
         <div className="space-y-3">
           <motion.button
