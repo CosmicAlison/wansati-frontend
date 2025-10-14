@@ -8,7 +8,6 @@ import { auth } from "../../../../auth";
 
 export default async function Messages() {
   const {getUserChats} = useChatService();
-  const session = await auth();
   return (
     <div className="grid h-screen w-full grid-cols-3 gap-0">
       <div>
