@@ -2,9 +2,9 @@
 import { Pen } from "lucide-react";
 import SearchBar from "@/components/ui/SearchBar";
 import ChatList from "@/components/ui/ChatList";
-import { useChatService } from "@/libs/ChatService";
+import { useChatService } from "@/lib/ChatService";
 import { Suspense } from 'react';
-import { auth } from "../../../../auth";
+import { auth } from "@/auth";
 
 export default async function Messages() {
   const {getUserChats} = useChatService();

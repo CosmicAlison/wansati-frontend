@@ -4,7 +4,7 @@ import { Chat } from '@/types/Chat';
 import { ChatProfilePic } from '@/utils/ChatProfilePic';
 import { formatDate } from '@/utils/FormatDate';
 import { use } from 'react';
-  import { auth } from '../../../auth';
+  import { auth } from '@/auth';
 
 export default async function ChatList({ chats }: { chats: Promise<Chat[]> }) {
   const chatList = use(chats);

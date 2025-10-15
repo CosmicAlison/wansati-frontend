@@ -1,6 +1,6 @@
 
-import {auth} from '../../auth';
-import { get, post } from '@/libs/Api';
+import {auth} from '@/auth';
+import { get, post } from '@/lib/Api';
 import { Chat } from '@/types/Chat';
 import { redirect } from 'next/navigation';
 

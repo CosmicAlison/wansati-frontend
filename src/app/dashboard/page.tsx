@@ -1,4 +1,4 @@
-import { auth } from "../../../auth";
+import { auth } from "@/auth";
 import HomeClient from "@/components/home/HomeClient";
 
 export default async function DashboardHome() {
