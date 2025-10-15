@@ -1,12 +1,11 @@
-
+"use client";
 import { Pen } from "lucide-react";
 import SearchBar from "@/components/ui/SearchBar";
 import ChatList from "@/components/ui/ChatList";
 import { useChatService } from "@/lib/ChatService";
 import { Suspense } from 'react';
-import { auth } from "@/auth";
 
-export default async function Messages() {
+export default function Messages() {
   const {getUserChats} = useChatService();
   return (
     <div className="grid h-screen w-full grid-cols-3 gap-0">

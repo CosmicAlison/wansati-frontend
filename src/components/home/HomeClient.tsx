@@ -2,7 +2,7 @@
 "use client";
 import { Sparkles, Users, Newspaper } from "lucide-react";
 import { motion } from "framer-motion";
-import { User } from "@/types/User";
+import { User } from "next-auth";
 
 export default async function DashboardHome({user}: {user?: User}) {
 
