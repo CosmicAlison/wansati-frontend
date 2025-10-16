@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import HomeClient from "@/components/home/HomeClient";
+import HomeClient from "@/components/dashboard/home/HomeClient";
 
 export default async function DashboardHome() {
     const session = await auth();
