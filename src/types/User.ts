@@ -52,4 +52,6 @@ export type User = {
   interests: Interest[];
   employmentHistory: Employment[];
   skills: Skill[];
+
+  token?: string;
 };
