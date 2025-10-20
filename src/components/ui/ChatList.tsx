@@ -3,15 +3,13 @@
 import { Chat } from '@/types/Chat';
 import { ChatProfilePic } from '@/utils/ChatProfilePic';
 import { formatDate } from '@/utils/FormatDate';
-import { use } from 'react';
-  import { auth } from '@/auth';
+import { auth } from '@/auth';
 
-export default async function ChatList({ chats }: { chats: Promise<Chat[]> }) {
-  const chatList = use(chats);
+export default async function ChatList({ chats }: { chats: Chat[] }) {
   const session = await auth(); 
   return (
     <div>
-        {chatList.map((chat) => (
+        {chats.map((chat) => (
         <button
             key={chat.id}
             className="w-full flex items-center gap-4 p-3 hover:bg-[var(--lilac)] transition text-left"

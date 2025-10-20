@@ -4,7 +4,7 @@ import { Sparkles, Users, Newspaper } from "lucide-react";
 import { motion } from "framer-motion";
 import { User } from "next-auth";
 
-export default async function DashboardHome({user}: {user?: User}) {
+export default function HomeClient({user}: {user?: User}) {
 
   return (
     <div className="grid h-screen w-full grid-cols-3 gap-0">
