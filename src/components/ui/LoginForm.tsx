@@ -16,12 +16,12 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#FAF7FD] to-[#FDFBFF] flex flex-col justify-center items-center px-6">
+    <main className="flex flex-col justify-center items-center px-6">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="w-full max-w-md bg-white rounded-3xl shadow-lg p-8 flex flex-col items-center"
+        className="w-full bg-white rounded-3xl shadow-lg p-8 flex flex-col items-center"
       >
         <Image
           src="/images/logo.png"
@@ -87,7 +87,7 @@ export default function LoginForm() {
             whileTap={{ scale: 0.97 }}
             type="submit"
             disabled={isPending}
-            className="mt-2 w-full bg-[var(--dark-purple)] text-white py-2 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-purple-800 transition"
+            className="mt-2 w-full bg-[var(--dark-purple)] py-2 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-purple-800 transition"
           >
             Log in
             <ArrowRightIcon className="w-5 h-5" />
@@ -109,7 +109,7 @@ export default function LoginForm() {
             Create account
           </a>
           <a
-            href="/auth/reset-password"
+            href="/auth/forgot-password"
             className="text-[var(--dark-purple)] font-medium hover:underline"
           >
             Forgot password?

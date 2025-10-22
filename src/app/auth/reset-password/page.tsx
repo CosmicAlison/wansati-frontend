@@ -1,137 +1,119 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { Eye, EyeOff, ArrowRight } from "lucide-react";
+import { useState } from 'react'
+import { LockIcon, CheckCircle2 } from 'lucide-react'
+import  Button  from '@/components/ui/Button'
+import Link from 'next/link'
 
 export default function ResetPasswordPage() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState('')
 
   const handleReset = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
-      return;
+    e.preventDefault()
+
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters long.')
+      return
     }
-    console.log("Reset password for", formData.email);
-  };
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.')
+      return
+    }
+
+    setError('')
+    setSuccess(true)
+    // TODO: call backend reset endpoint here with token from URL
+  }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#FAF7FD] to-[#FDFBFF] flex flex-col justify-center items-center px-6">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="w-full max-w-md bg-white rounded-3xl shadow-lg p-8 flex flex-col items-center"
-      >
-        <Image
-          src="/images/logo.png"
-          alt="Wansati Logo"
-          width={80}
-          height={80}
-          className="mb-4"
-        />
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-gray-50 to-white px-4">
+      <div className="w-full max-w-md rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+        {!success ? (
+          <>
+            <h2 className="text-center text-2xl font-semibold tracking-tight text-gray-800">
+              Reset your password
+            </h2>
+            <p className="mt-2 text-center text-sm text-gray-500">
+              Enter your new password below. Make sure it’s secure.
+            </p>
 
-        <h1 className="text-2xl font-bold text-[var(--dark-purple)] mb-1">
-          Reset your password
-        </h1>
-        <p className="text-[var(--light-grey)] mb-6 text-center text-sm">
-          Enter your email and create a new password to regain access.
-        </p>
+            <form onSubmit={handleReset} className="mt-6 space-y-4">
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  New Password
+                </label>
+                <div className="relative mt-1">
+                  <LockIcon className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full rounded-md border border-gray-300 py-2 pl-10 pr-3 text-sm outline-none focus:border-black"
+                    placeholder="Enter new password"
+                    required
+                  />
+                </div>
+              </div>
 
-        <form onSubmit={handleReset} className="w-full flex flex-col gap-4">
-          <div>
-            <label className="block text-sm text-gray-600 mb-1">Email</label>
-            <input
-              name="email"
-              type="email"
-              required
-              placeholder="amina@example.com"
-              onChange={handleChange}
-              value={formData.email}
-              className="w-full border border-gray-200 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--dark-purple)]"
-            />
-          </div>
+              <div>
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Confirm Password
+                </label>
+                <div className="relative mt-1">
+                  <LockIcon className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <input
+                    id="confirmPassword"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="w-full rounded-md border border-gray-300 py-2 pl-10 pr-3 text-sm outline-none focus:border-black"
+                    placeholder="Confirm new password"
+                    required
+                  />
+                </div>
+              </div>
 
-          <div>
-            <label className="block text-sm text-gray-600 mb-1">
-              New Password
-            </label>
-            <div className="relative">
-              <input
-                name="password"
-                type={showPassword ? "text" : "password"}
-                required
-                placeholder="••••••••"
-                onChange={handleChange}
-                value={formData.password}
-                className="w-full border border-gray-200 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--dark-purple)]"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-2.5 text-gray-500"
+              {error && (
+                <p className="text-sm text-red-500 font-medium">{error}</p>
+              )}
+
+              <Button
+                type="submit"
+                className="w-full bg-black text-white hover:bg-gray-800"
               >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </div>
+                Reset Password
+              </Button>
+            </form>
+          </>
+        ) : (
+          <div className="flex flex-col items-center py-8 text-center">
+            <CheckCircle2 className="h-12 w-12 text-green-500" />
+            <h3 className="mt-4 text-xl font-semibold text-gray-800">
+              Password Reset Successful
+            </h3>
+            <p className="mt-2 text-sm text-gray-500">
+              You can now log in with your new password.
+            </p>
+            <Link
+              href="/login"
+              className="mt-4 inline-block text-sm font-medium text-black underline"
+            >
+              Go to Login
+            </Link>
           </div>
-
-          <div>
-            <label className="block text-sm text-gray-600 mb-1">
-              Confirm Password
-            </label>
-            <div className="relative">
-              <input
-                name="confirmPassword"
-                type={showConfirm ? "text" : "password"}
-                required
-                placeholder="••••••••"
-                onChange={handleChange}
-                value={formData.confirmPassword}
-                className="w-full border border-gray-200 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--dark-purple)]"
-              />
-              <button
-                type="button"
-                onClick={() => setShowConfirm(!showConfirm)}
-                className="absolute right-3 top-2.5 text-gray-500"
-              >
-                {showConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </div>
-          </div>
-
-          <motion.button
-            whileTap={{ scale: 0.97 }}
-            type="submit"
-            className="mt-4 bg-[var(--dark-purple)] text-white py-2 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-purple-800 transition"
-          >
-            Reset Password
-            <ArrowRight className="w-4 h-4" />
-          </motion.button>
-        </form>
-
-        <p className="mt-4 text-sm text-gray-600">
-          Remembered your password?{" "}
-          <a
-            href="/auth/login"
-            className="text-[var(--dark-purple)] font-medium hover:underline"
-          >
-            Log in
-          </a>
-        </p>
-      </motion.div>
-    </main>
-  );
+        )}
+      </div>
+    </div>
+  )
 }
