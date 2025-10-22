@@ -5,7 +5,8 @@ import { User } from "./User";
 export type Message = {
   id: number;
   sentAt: string;
-  sender: User;
+  author: User;
   content: string;
+  isMe: boolean;
   chat?: Chat;
 };

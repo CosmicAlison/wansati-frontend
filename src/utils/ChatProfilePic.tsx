@@ -1,6 +1,6 @@
 import { Chat } from "@/types/Chat";
 
-  export function ChatProfilePic({ chat, currentUserId }: { chat: Chat; currentUserId: string }) {
+  export function ChatProfilePic({ chat, currentUserId }: { chat: Chat; currentUserId: number }) {
     let profileSrc = "/user_default.jpg";
     if (chat.type === "PRIVATE") {
       const otherUser = chat.members.find(member => member.id !== currentUserId);

@@ -34,24 +34,23 @@ export type Skill = {
 };
 
 export type User = {
-  id: string;
+  id: number;
   username: string;
   name: string;
-  role: string;
-  location: string;
-  bio: string;
-  enabled: boolean;
-  locked: boolean;
-  profileUrl: string;
+  role?: string;
+  test: boolean;
+  location?: string;
+  bio?: string;
+  profileUrl?: string;
   createdAt: string;
   password: string;
   email: string;
-
-  certifications: Certification[];
-  educationHistory: Education[];
-  interests: Interest[];
-  employmentHistory: Employment[];
-  skills: Skill[];
-
-  token?: string;
+  certifications?: Certification[];
+  educationHistory?: Education[];
+  interests?: Interest[];
+  employmentHistory?: Employment[];
+  skills?: Skill[];
+  token: string;
 };
+
+export type SafeUser = Omit<User, 'password' | 'token' | 'test'>;
