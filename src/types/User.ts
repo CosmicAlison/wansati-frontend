@@ -55,3 +55,5 @@ export type User = {
 
   token?: string;
 };
+
+export type SafeUser = Omit<User, 'password' | 'token'>;
