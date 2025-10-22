@@ -2,7 +2,7 @@
 "use client";
 import { Sparkles, Users, Newspaper } from "lucide-react";
 import { motion } from "framer-motion";
-import { User } from "next-auth";
+import type { User } from '@/types/User';
 
 export default function HomeClient({user}: {user?: User}) {
 
