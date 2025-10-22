@@ -34,7 +34,7 @@ export type Skill = {
 };
 
 export type User = {
-  id: string;
+  id: number;
   username: string;
   name: string;
   role: string;
