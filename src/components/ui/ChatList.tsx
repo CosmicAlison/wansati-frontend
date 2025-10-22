@@ -14,7 +14,7 @@ export default async function ChatList({ chats }: { chats: Chat[] }) {
             key={chat.id}
             className="w-full flex items-center gap-4 p-3 hover:bg-[var(--lilac)] transition text-left"
         >
-            <ChatProfilePic chat={chat} currentUserId={session?.user?.id ?? ""} />
+            <ChatProfilePic chat={chat} currentUserId={session?.user?.id ?? 0} />
             <div className="flex-1 min-w-0">
             <div className="flex justify-between items-center">
                 <span className="font-semibold text-[var(--dark-purple)] truncate">{chat.name}</span>
