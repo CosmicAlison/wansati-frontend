@@ -80,15 +80,9 @@ export default function ProfileModal({
             <div className="mt-6 flex gap-3 justify-center">
               <Button
                 onClick={onMessage}
-                className="bg-[var(--dark-purple)] hover:bg-purple-800 text-white rounded-full px-5 py-2 text-sm"
-              >
-                Message
-              </Button>
-              <Button
-                variant="outline"
                 className="rounded-full px-5 py-2 text-sm border-[var(--dark-purple)] text-[var(--dark-purple)] hover:bg-[#F5F0FC]"
               >
-                View Full Profile
+                Message
               </Button>
             </div>
           </motion.div>
