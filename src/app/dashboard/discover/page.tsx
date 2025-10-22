@@ -5,50 +5,82 @@ import { Sparkles, Briefcase, Users, Filter, Search } from "lucide-react";
 import Image from "next/image";
 import ProfileModal from "@/components/ui/ProfileModal";
 import SearchModal from "@/components/ui/SearchModal";
-import { User } from "@/types/User";
+import { SafeUser } from "@/types/User";
 
 const mockProfiles = [
   {
     id: 1,
     name: "Lerato M.",
+    username: "Lerato M.",
     role: "Product Manager",
     type: "Mentor",
     location: "Cape Town, ZA",
     bio: "Helping women transition into tech PM roles with confidence.",
     profileUrl: "/images/avatars/mentor1.png",
+    createdAt: "2023-01-15T10:00:00Z",
+    interests: [],
+    email: "",
+    certifications: [],
+    educationHistory: [],
+    employmentHistory: [],
+    skills: []
   },
   {
     id: 2,
     name: "Aisha K.",
+    username: "Aisha K.",
     role: "UX Designer",
     type: "Peer",
     location: "Maputo, MZ",
     bio: "Building human-centered designs with heart and purpose.",
     profileUrl: "/images/avatars/peer1.png",
+    createdAt: "2023-01-15T10:00:00Z",
+    interests: [],
+    email: "",
+    certifications: [],
+    educationHistory: [],
+    employmentHistory: [],
+    skills: []
   },
   {
     id: 3,
     name: "Nadia S.",
+    username: "Nadia S.",
     role: "Frontend Developer",
     type: "Mentee",
     location: "Mauritius",
     bio: "Eager to grow into full-stack dev and uplift others along the way.",
     profileUrl: "/images/avatars/mentee1.png",
+    createdAt: "2023-01-15T10:00:00Z",
+    interests: [],
+    email: "",
+    certifications: [],
+    educationHistory: [],
+    employmentHistory: [],
+    skills: []
   },
   {
     id: 4,
     name: "Tanya L.",
+    username: "Tanya L.",
     role: "Marketing Strategist",
     type: "Peer",
     location: "Nairobi, KE",
     bio: "Passionate about brand storytelling and women's leadership.",
     profileUrl: "/images/avatars/peer2.png",
+    createdAt: "2023-01-15T10:00:00Z",
+    interests: [],
+    email: "",
+    certifications: [],
+    educationHistory: [],
+    employmentHistory: [],
+    skills: []
   },
 ];
 
 export default function DiscoverPage() {
   const [index, setIndex] = useState(0);
-  const [selectedUser, setSelectedUser] = useState<User>();
+  const [selectedUser, setSelectedUser] = useState<SafeUser>();
   const [openProfile, setOpenProfile] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
 
@@ -92,7 +124,7 @@ export default function DiscoverPage() {
             >
               <div className="relative w-16 h-16 rounded-full overflow-hidden ring-2 ring-[var(--dark-purple)] hover:ring-purple-600 transition-all">
                 <Image
-                  src={user.image}
+                  src={user.profileUrl}
                   alt={user.name}
                   fill
                   className="object-cover"
@@ -116,7 +148,7 @@ export default function DiscoverPage() {
       >
         <div className="relative w-40 h-40 rounded-full overflow-hidden mt-3">
           <Image
-            src={profile.image}
+            src={profile.profileUrl}
             alt={profile.name}
             fill
             className="object-cover"
@@ -183,8 +215,7 @@ export default function DiscoverPage() {
             location: selectedUser.location,
             bio: selectedUser.bio,
             avatar: selectedUser.profileUrl,
-            interests: "Tech, Mentorship, Growth",
-            mutualConnections: Math.floor(Math.random() * 5),
+            interests: selectedUser.interests.toString()
           }}
         />
       )}
@@ -196,7 +227,7 @@ export default function DiscoverPage() {
             isOpen={openSearch}
             onClose={() => setOpenSearch(false)}
             profiles={mockProfiles}
-            onSelect={(user : User) => {
+            onSelect={(user : SafeUser) => {
               setSelectedUser(user);
               setOpenProfile(true);
               setOpenSearch(false);

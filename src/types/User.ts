@@ -40,8 +40,6 @@ export type User = {
   role: string;
   location: string;
   bio: string;
-  enabled: boolean;
-  locked: boolean;
   profileUrl: string;
   createdAt: string;
   password: string;

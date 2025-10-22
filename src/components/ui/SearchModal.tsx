@@ -1,5 +1,5 @@
 "use client";
-import { User } from "@/types/User";
+import { SafeUser } from "@/types/User";
 import { motion } from "framer-motion";
 import { X, Search } from "lucide-react";
 import Image from "next/image";
@@ -56,7 +56,7 @@ export default function SearchModal({ isOpen, onClose, profiles, onSelect }: any
 
         <div className="max-h-72 overflow-y-auto no-scrollbar">
           {filtered.length > 0 ? (
-            filtered.map((p: User) => (
+            filtered.map((p: SafeUser) => (
               <div
                 key={p.id}
                 onClick={() => onSelect(p)}
