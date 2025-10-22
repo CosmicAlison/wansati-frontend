@@ -4,20 +4,20 @@ import Image from "next/image";
 import { X, MapPin } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { SafeUser } from "@/types/User";
+import { useChatService } from "@/lib/ChatService";
 
 export interface ProfileModalProps {
   isOpen: boolean;
   onClose: () => void;
   user: SafeUser;
-  onMessage?: () => void;
 }
 
 export default function ProfileModal({
   isOpen,
   onClose,
   user,
-  onMessage,
 }: ProfileModalProps) {
+  const { createOrGetChat } = useChatService();
   return (
     <AnimatePresence>
       {isOpen && (
@@ -79,7 +79,7 @@ export default function ProfileModal({
             </div>
             <div className="mt-6 flex gap-3 justify-center">
               <Button
-                onClick={onMessage}
+                onClick={() => createOrGetChat(user.id)}
                 className="rounded-full px-5 py-2 text-sm border-[var(--dark-purple)] text-[var(--dark-purple)] hover:bg-[#F5F0FC]"
               >
                 Message
