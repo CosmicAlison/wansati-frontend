@@ -1,21 +1,14 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { X, MapPin, Briefcase, Heart } from "lucide-react";
+import { X, MapPin } from "lucide-react";
 import Button from "@/components/ui/button";
+import { SafeUser } from "@/types/User";
 
 export interface ProfileModalProps {
   isOpen: boolean;
   onClose: () => void;
-  user: {
-    name: string;
-    role: string;
-    location: string;
-    bio?: string;
-    avatar?: string;
-    interests?: string;
-    mutualConnections?: number;
-  };
+  user: SafeUser;
   onMessage?: () => void;
 }
 
@@ -52,7 +45,7 @@ export default function ProfileModal({
 
             <div className="flex flex-col items-center text-center">
               <Image
-                src={user.avatar || "/images/avatars/default.png"}
+                src={user.profileUrl || "/images/avatars/default.png"}
                 alt={user.name}
                 width={90}
                 height={90}
@@ -75,23 +68,15 @@ export default function ProfileModal({
             )}
 
             <div className="mt-4 flex flex-wrap gap-2">
-              {user.interests?.split(",").map((tag, i) => (
+              {user.interests?.map((tag, i) => (
                 <span
                   key={i}
                   className="bg-[#F3EAFD] text-[var(--dark-purple)] text-xs px-3 py-1.5 rounded-full"
                 >
-                  {tag.trim()}
+                  {tag.name}
                 </span>
               ))}
             </div>
-
-            {user.mutualConnections !== undefined && (
-              <div className="flex items-center justify-center mt-4 text-gray-500 text-sm gap-1">
-                <Heart className="w-4 h-4 text-pink-500" />
-                <span>{user.mutualConnections} mutual connections</span>
-              </div>
-            )}
-
             <div className="mt-6 flex gap-3 justify-center">
               <Button
                 onClick={onMessage}
