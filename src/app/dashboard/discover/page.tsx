@@ -192,18 +192,6 @@ export default function DiscoverPage() {
         </div>
       </motion.section>
 
-      {/* FOOTER NAV */}
-      <footer className="mt-10 w-full max-w-3xl flex justify-around text-[var(--dark-purple)]">
-        <div className="flex flex-col items-center">
-          <Users className="w-5 h-5 mb-1" />
-          <span className="text-xs font-medium">Discover</span>
-        </div>
-        <div className="flex flex-col items-center opacity-60 hover:opacity-100 cursor-pointer">
-          <Briefcase className="w-5 h-5 mb-1" />
-          <span className="text-xs font-medium">Jobs</span>
-        </div>
-      </footer>
-
       {/* PROFILE MODAL */}
       {selectedUser && (
         <ProfileModal
