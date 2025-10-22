@@ -209,14 +209,7 @@ export default function DiscoverPage() {
         <ProfileModal
           isOpen={openProfile}
           onClose={() => setOpenProfile(false)}
-          user={{
-            name: selectedUser.name,
-            role: selectedUser.role,
-            location: selectedUser.location,
-            bio: selectedUser.bio,
-            avatar: selectedUser.profileUrl,
-            interests: selectedUser.interests.toString()
-          }}
+          user={selectedUser}
         />
       )}
 

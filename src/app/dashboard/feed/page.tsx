@@ -3,14 +3,11 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Image as ImageIcon, Heart, MessageCircle, Send } from "lucide-react";
 import Image from "next/image";
+import { SafeUser } from "@/types/User";
 
 type Post = {
   id: number;
-  author: {
-    name: string;
-    role: string;
-    image: string;
-  };
+  author: SafeUser;
   content: string;
   image?: string;
   likes: number;
@@ -24,7 +21,11 @@ const mockFeed: Post[] = [
     author: {
       name: "Thandi N.",
       role: "Software Engineer • Johannesburg",
-      image: "/images/avatars/peer2.png",
+      profileUrl: "/images/avatars/peer2.png",
+      username: "thandi.n",
+      id: 2,
+      createdAt: "",
+      email: "",
     },
     content:
       "Just got promoted to mid-level dev 🎉 It’s been a wild journey — from learning late nights to imposter syndrome. For any sis feeling stuck — you *will* get there. 💜",
@@ -37,7 +38,11 @@ const mockFeed: Post[] = [
     author: {
       name: "Amina S.",
       role: "HR Manager • Nairobi",
-      image: "/images/avatars/mentor2.png",
+      profileUrl: "/images/avatars/peer2.png",
+      username: "thandi.n",
+      id: 2,
+      createdAt: "",
+      email: "",
     },
     content:
       "Our company just opened remote roles in Kenya and Mauritius 🇰🇪🇲🇺 — full-stack, marketing, and design. Happy to refer Wansati sisters first!",
@@ -51,7 +56,11 @@ const mockFeed: Post[] = [
     author: {
       name: "Fatima K.",
       role: "Product Designer • Lagos",
-      image: "/images/avatars/peer3.png",
+      profileUrl: "/images/avatars/peer2.png",
+      username: "thandi.n",
+      id: 2,
+      createdAt: "",
+      email: "",
     },
     content:
       "What’s the most effective way you’ve improved your salary negotiation confidence? I freeze up every time. 😭 Any tips from experienced sisters?",
@@ -70,9 +79,13 @@ export default function FeedPage() {
     const temp = {
       id: Date.now(),
       author: {
-        name: "You",
-        role: "Member • Wansati",
-        image: "/images/avatars/default.png",
+          name: "Fatima K.",
+          role: "Product Designer • Lagos",
+          profileUrl: "/images/avatars/peer2.png",
+          username: "thandi.n",
+          id: 2,
+          createdAt: "",
+          email: "",
       },
       content: newPost,
       likes: 0,
@@ -130,7 +143,7 @@ export default function FeedPage() {
           >
             <div className="flex items-center gap-3 mb-3">
               <Image
-                src={post.author.image}
+                src={post.author.profileUrl || "https://via.placeholder.com/150"}
                 alt={post.author.name}
                 width={45}
                 height={45}
