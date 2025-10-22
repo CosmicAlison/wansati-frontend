@@ -2,7 +2,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { X, MapPin } from "lucide-react";
-import Button from "@/components/ui/button";
+import Button from "@/components/ui/Button";
 import { SafeUser } from "@/types/User";
 
 export interface ProfileModalProps {
