@@ -1,8 +1,10 @@
-import { auth } from "@/auth";
-import HomeClient from "@/components/dashboard/home/HomeClient";
-import { NextResponse } from "next/server";
+"use client"
 
-export default async function DashboardHome() {
-  const session = await auth();
-  return <HomeClient user={session?.user} />;
+import HomeClient from "@/components/dashboard/home/HomeClient";
+import { useUserStore } from "@/store/useUserStore";
+  
+
+export default function DashboardHome() {
+  const user = useUserStore((state) => state.user);
+  return <HomeClient user={user||undefined} />;
 }

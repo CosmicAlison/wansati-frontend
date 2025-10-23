@@ -20,6 +20,9 @@ export async function get<T>(path: string): Promise<T> {
 export async function post<T>(path: string, body: any): Promise<T> {
   const res = await fetch(`${BASE_URL}${path}`, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     credentials: "include",
     body: JSON.stringify(body),
   });

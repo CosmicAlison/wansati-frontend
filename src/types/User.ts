@@ -1,3 +1,11 @@
+export type Match = {
+  id: number;
+  userId: number;
+  matchedUserId: number;
+  status: 'pending' | 'accepted' | 'blocked';
+  createdAt: string;
+};
+
 export type Certification = {
   id: number;
   title: string;
@@ -50,7 +58,7 @@ export type User = {
   interests?: Interest[];
   employmentHistory?: Employment[];
   skills?: Skill[];
-  token: string;
+  matches?: Match[];  
 };
 
-export type SafeUser = Omit<User, 'password' | 'token' | 'test'>;
+export type SafeUser = Omit<User, 'password' | 'test'>;

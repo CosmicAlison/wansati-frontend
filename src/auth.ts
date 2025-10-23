@@ -1,24 +1,33 @@
 
 import { get, post } from "@/lib/Api";
-import { User } from "@/types/User";
+import { SafeUser} from "@/types/User";
+import { useUserStore } from "@/store/useUserStore";
 
 interface AuthResponse {
-  user: User;
+  success: boolean;
   message?: string;
+  data?: {
+    user: SafeUser;
+  };
+  timestamp: string;
 }
 
 export async function signIn(data: { email: string; password: string } | FormData) {
   const body =
     data instanceof FormData ? Object.fromEntries(data.entries()) : data;
-
   const res = await post<AuthResponse>("/auth/login", body);
 
-  if (!res?.user) {
-    throw new Error(res?.message || "Login failed");
+  if (!res?.data?.user) {
+    return (res?.message || "Login failed");
   }
 
-  return res;
+  // Update user store
+  const { setUser } = useUserStore.getState();
+  setUser(res.data.user);
+
+  return;
 }
+
 
 export async function signOut() {
   try {
@@ -32,8 +41,8 @@ export async function signOut() {
 export async function getSession() {
   try {
     const res = await get<AuthResponse>("/auth/me");
-    if (res?.user) {
-      return { user: res.user };
+    if (res?.data?.user) {
+      return { user: res?.data?.user };
     }
 
     return null;

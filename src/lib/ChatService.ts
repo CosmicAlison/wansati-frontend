@@ -2,39 +2,26 @@
 
 import { Chat } from "@/types/Chat";
 import { useRouter } from "next/navigation";
+import { get, post } from "@/lib/Api";
 
 export function useChatService() {
-
   const router = useRouter();
+
+  // Fetch all user chats
   async function getUserChats(): Promise<Chat[]> {
-    const res = await fetch("/api/chat");
-    if (!res.ok) throw new Error("Failed to fetch chats");
-    return res.json();
+    return get<Chat[]>("/chat");
   }
 
+  // Create a private chat with another user
   async function createPrivateChat(otherUserId: number): Promise<Chat> {
-    const res = await fetch(`/api/chat/private?userId2=${otherUserId}`, {
-      method: "POST",
-    });
-    if (!res.ok) throw new Error("Failed to create chat");
-    return res.json();
+    return post<Chat>(`/chat/private?userId2=${otherUserId}`, {});
   }
 
+  // Create or get an existing chat, then navigate to it
   async function createOrGetChat(otherUserId: number) {
-    // Call your backend endpoint that checks/creates a chat
-    const res = await fetch("/api/chat/create-or-get", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ targetUserId: otherUserId }),
-    });
-
-    if (!res.ok) throw new Error("Failed to create or get chat");
-
-    const chat: Chat = await res.json();
-
-    // Navigate to chat page
+    const chat = await post<Chat>("/chat/create-or-get", { targetUserId: otherUserId });
     router.push(`/dashboard/messages/${chat.id}`);
   }
 
-  return { getUserChats, createPrivateChat, createOrGetChat};
+  return { getUserChats, createPrivateChat, createOrGetChat };
 }
