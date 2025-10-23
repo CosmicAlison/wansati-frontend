@@ -1,11 +1,11 @@
 import { Chat } from "./Chat";
-import { User } from "./User";
+import { SafeUser} from "./User";
 
 
 export type Message = {
   id: number;
   sentAt: string;
-  author: User;
+  author: SafeUser
   content: string;
   isMe: boolean;
   chat?: Chat;

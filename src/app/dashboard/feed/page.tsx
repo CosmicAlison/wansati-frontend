@@ -19,11 +19,11 @@ const mockFeed: Post[] = [
   {
     id: 1,
     author: {
-      name: "Thandi N.",
+      name: "Alice Johnson",
       role: "Software Engineer • Johannesburg",
-      profileUrl: "/images/avatars/peer2.png",
-      username: "thandi.n",
-      id: 2,
+      profileUrl: "https://wansati.s3.ap-southeast-2.amazonaws.com/alice_tech.jpg",
+      username: "alice_tech",
+      id: 1,
       createdAt: "",
       email: "",
     },
@@ -36,37 +36,20 @@ const mockFeed: Post[] = [
   {
     id: 2,
     author: {
-      name: "Amina S.",
-      role: "HR Manager • Nairobi",
-      profileUrl: "/images/avatars/peer2.png",
-      username: "thandi.n",
+      name: "Bella Smith",
+      role: "Marketing Associate",
+      profileUrl: "https://wansati.s3.ap-southeast-2.amazonaws.com/bella_marketing.jpg",
+      username: "bella_marketing",
       id: 2,
       createdAt: "",
       email: "",
     },
     content:
       "Our company just opened remote roles in Kenya and Mauritius 🇰🇪🇲🇺 — full-stack, marketing, and design. Happy to refer Wansati sisters first!",
-    image: "/images/posts/hiring.png",
+    image: "https://wansati.s3.ap-southeast-2.amazonaws.com/backdrop.jpg",
     likes: 73,
     comments: 22,
     createdAt: "5h ago",
-  },
-  {
-    id: 3,
-    author: {
-      name: "Fatima K.",
-      role: "Product Designer • Lagos",
-      profileUrl: "/images/avatars/peer2.png",
-      username: "thandi.n",
-      id: 2,
-      createdAt: "",
-      email: "",
-    },
-    content:
-      "What’s the most effective way you’ve improved your salary negotiation confidence? I freeze up every time. 😭 Any tips from experienced sisters?",
-    likes: 34,
-    comments: 19,
-    createdAt: "1d ago",
   },
 ];
 
@@ -81,7 +64,7 @@ export default function FeedPage() {
       author: {
           name: "Fatima K.",
           role: "Product Designer • Lagos",
-          profileUrl: "/images/avatars/peer2.png",
+          profileUrl: "/user.jpg",
           username: "thandi.n",
           id: 2,
           createdAt: "",
@@ -106,7 +89,7 @@ export default function FeedPage() {
         >
           <div className="flex gap-3 items-start">
             <Image
-              src="/images/avatars/default.png"
+              src="/user.jpg"
               alt="User"
               width={45}
               height={45}

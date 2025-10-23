@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Save, Upload, User, Briefcase, GraduationCap, Heart, Edit3 } from "lucide-react";
 
 export default function EditProfilePage() {
-  const [profilePic, setProfilePic] = useState("/images/avatars/default.png");
+  const [profilePic, setProfilePic] = useState("/user.jpg");
   const [formData, setFormData] = useState({
     name: "Amina K.",
     role: "Product Manager",

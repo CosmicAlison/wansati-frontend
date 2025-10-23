@@ -1,10 +1,6 @@
 "use client"
-
-import HomeClient from "@/components/dashboard/home/HomeClient";
-import { useUserStore } from "@/store/useUserStore";
-  
+import { redirect } from 'next/navigation';
 
 export default function DashboardHome() {
-  const user = useUserStore((state) => state.user);
-  return <HomeClient user={user||undefined} />;
+  redirect('/dashboard/discover');
 }

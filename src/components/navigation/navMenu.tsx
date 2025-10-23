@@ -11,7 +11,7 @@ export default function CustomNavMenu() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className='fixed'>
+    <div className='fixed z-50'>
       {/* Burger button */}
       <button
         className="md:hidden fixed top-4 left-4 z-50 p-2 border border-[var(--dark-purple)] text-[var(--dark-purple)] rounded-md"
@@ -23,7 +23,7 @@ export default function CustomNavMenu() {
       {/* Sidebar */}
       <aside
         className={`
-          fixed z-40 md:static md:flex md:flex-col md:h-screen
+          fixed z-40 md:static md:flex md:flex-col h-screen
           items-center w-45 bg-white border-r border-[var(--light-grey)] text-black p-4
           transition-transform duration-300 ease-in-out
           ${menuOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0
