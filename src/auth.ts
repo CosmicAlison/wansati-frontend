@@ -1,42 +1,48 @@
 
+import { get, post } from "@/lib/Api";
+import { User } from "@/types/User";
+
+interface AuthResponse {
+  user: User;
+  message?: string;
+}
+
 export async function signIn(data: { email: string; password: string } | FormData) {
-  let body: any;
-  if (data instanceof FormData) {
-    body = Object.fromEntries(data.entries());
-  } else {
-    body = data;
+  const body =
+    data instanceof FormData ? Object.fromEntries(data.entries()) : data;
+
+  const res = await post<AuthResponse>("/auth/login", body);
+
+  if (!res?.user) {
+    throw new Error(res?.message || "Login failed");
   }
 
-  const res = await fetch('/api/auth/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
-
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({ error: 'Login failed' }));
-    throw new Error(err.error || 'Login failed');
-  }
-
-  return res.json();
+  return res;
 }
 
 export async function signOut() {
-  await fetch('/api/auth/logout', { method: 'POST' });
+  try {
+    // Backend should clear the cookie
+    await post("/auth/logout", {});
+  } catch (err) {
+    console.error("Logout failed:", err);
+  }
 }
 
 export async function getSession() {
-  const res = await fetch('/api/auth/me');
-  if (!res.ok) return null;
-  const data = await res.json();
-  // return the user object (may include token)
-  return data.user ? { user: data.user, token: data.user.token ?? null } : null;
+  try {
+    const res = await get<AuthResponse>("/auth/me");
+    if (res?.user) {
+      return { user: res.user };
+    }
+
+    return null;
+  } catch (err) {
+    console.error("Session fetch failed:", err);
+    return null;
+  }
 }
 
-// Compatibility: export a simple auth() function similar to previous NextAuth handler
-// so existing code that calls `await auth()` still works.
 export async function auth() {
-  const session = await getSession();
-  // previous code expected a session object with `user` property
-  return session;
+  return await getSession();
 }

@@ -24,7 +24,7 @@ export default function LoginForm() {
         className="w-full bg-white rounded-3xl shadow-lg p-8 flex flex-col items-center"
       >
         <Image
-          src="/images/logo.png"
+          src="/logo_color.png"
           alt="Wansati Logo"
           width={80}
           height={80}
