@@ -24,7 +24,7 @@ export default function CustomNavMenu() {
       <aside
         className={`
           fixed z-40 md:static md:flex md:flex-col h-screen
-          items-center w-45 bg-white border-r border-[var(--light-grey)] text-black p-4
+          items-center w-45 bg-white border-r border-[var(--dark-purple)] text-black p-4
           transition-transform duration-300 ease-in-out
           ${menuOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0
         `}

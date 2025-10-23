@@ -5,20 +5,18 @@ import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import { useChatService } from "@/lib/ChatService";
 import { Message } from "@/types/Message";
+import { useChatStore } from "@/store/useChatStore";
 
-interface ChatPageProps {
-  params: { chatId: string };
-}
-
-export default function ChatPage({ params }: ChatPageProps) {
-  const { getUserChats } = useChatService(); // optional, can fetch user info too
+export default function ChatPage() {
+  //const { getUserChats } = useChatService(); // optional, can fetch user info too
+  const { chat, setChat, clearChat } = useChatStore();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function fetchMessages() {
-      const res = await fetch(`/api/chat/${params.chatId}/messages`);
+      const res = await fetch(`/api/chat/${chat?.id}/messages`);
       if (res.ok) {
         const data: Message[] = await res.json();
         setMessages(data);
@@ -26,12 +24,12 @@ export default function ChatPage({ params }: ChatPageProps) {
     }
 
     fetchMessages();
-  }, [params.chatId]);
+  }, [chat?.id]);
 
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    const res = await fetch(`/api/chat/${params.chatId}/message`, {
+    const res = await fetch(`/api/chat/${chat?.id}/message`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ content: input }),

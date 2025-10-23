@@ -15,6 +15,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --dark-purple: #6b21a8;
+    --lilac: #da92fb;
     --foreground: #0a0a0a;
     --background: #ededed;
   }

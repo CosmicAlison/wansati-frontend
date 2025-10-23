@@ -64,7 +64,7 @@ export default function SearchModal({ isOpen, onClose, profiles, onSelect }: any
               >
                 <div className="relative w-10 h-10 rounded-full overflow-hidden">
                   <Image
-                    src={p.profileUrl}
+                    src={p.profileUrl || "user.jpg"}
                     alt={p.name}
                     fill
                     className="object-cover"
