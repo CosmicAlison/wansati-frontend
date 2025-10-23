@@ -7,10 +7,10 @@ import { useChatService } from "@/lib/ChatService";
 import { Message } from "@/types/Message";
 
 interface ChatPageProps {
-  chatId: string;
+  params: { chatId: string };
 }
 
-export default function ChatPage({ chatId }: ChatPageProps) {
+export default function ChatPage({ params }: ChatPageProps) {
   const { getUserChats } = useChatService(); // optional, can fetch user info too
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -18,7 +18,7 @@ export default function ChatPage({ chatId }: ChatPageProps) {
 
   useEffect(() => {
     async function fetchMessages() {
-      const res = await fetch(`/api/chat/${chatId}/messages`);
+      const res = await fetch(`/api/chat/${params.chatId}/messages`);
       if (res.ok) {
         const data: Message[] = await res.json();
         setMessages(data);
@@ -26,12 +26,12 @@ export default function ChatPage({ chatId }: ChatPageProps) {
     }
 
     fetchMessages();
-  }, [chatId]);
+  }, [params.chatId]);
 
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    const res = await fetch(`/api/chat/${chatId}/message`, {
+    const res = await fetch(`/api/chat/${params.chatId}/message`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ content: input }),
