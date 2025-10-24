@@ -229,6 +229,10 @@ export default function FeedPage() {
             isOpen={openComments}
             onClose={() => setOpenComments(false)}
             onAddComment={handleNewComment}
+            onProfileClick={(user) => {
+              setSelectedUser(user);
+              setOpenProfile(true);
+            }}
           />
         )}
     </main>

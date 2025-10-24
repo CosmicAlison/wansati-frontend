@@ -6,12 +6,14 @@ import { X } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { PostComment } from "@/types/Post";
+import { SafeUser } from "@/types/User";
 
 export interface CommentsModalProps {
   isOpen: boolean;
   onClose: () => void;
   comments: PostComment[];
-  onAddComment?: (content: string) => void;
+  onAddComment: (content: string) => void;
+  onProfileClick: (user: SafeUser) => void;
 }
 
 export default function CommentsModal({
@@ -19,6 +21,7 @@ export default function CommentsModal({
   onClose,
   comments,
   onAddComment,
+  onProfileClick
 }: CommentsModalProps) {
   const [newComment, setNewComment] = useState("");
 
@@ -60,7 +63,7 @@ export default function CommentsModal({
               )}
               {comments.map((comment) => (
                 <div key={comment.id} className="flex gap-3 items-start">
-                  <div className="w-10 h-10 relative rounded-full overflow-hidden flex-shrink-0">
+                  <div className="w-10 h-10 relative rounded-full overflow-hidden flex-shrink-0"  onClick={()=>{onProfileClick(comment?.author);}}>
                     <Image
                       src={comment.author.profileUrl || "/images/avatars/default.png"}
                       alt={comment.author.name}
