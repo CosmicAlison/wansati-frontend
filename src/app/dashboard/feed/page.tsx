@@ -4,16 +4,9 @@ import { motion } from "framer-motion";
 import { Image as ImageIcon, Heart, MessageCircle, Send } from "lucide-react";
 import Image from "next/image";
 import { SafeUser } from "@/types/User";
-
-type Post = {
-  id: number;
-  author: SafeUser;
-  content: string;
-  image?: string;
-  likes: number;
-  comments: number;
-  createdAt: string;
-};
+import ProfileModal from "@/components/ui/ProfileModal";
+import { Post, PostComment } from "@/types/Post";
+import CommentsModal from "@/components/ui/CommentsModal";
 
 const mockFeed: Post[] = [
   {
@@ -30,7 +23,23 @@ const mockFeed: Post[] = [
     content:
       "Just got promoted to mid-level dev 🎉 It’s been a wild journey — from learning late nights to imposter syndrome. For any sis feeling stuck — you *will* get there. 💜",
     likes: 48,
-    comments: 12,
+    comments: [{id: 1, author: {
+      name: "Bella Smith",
+      role: "Marketing Associate",
+      profileUrl: "https://wansati.s3.ap-southeast-2.amazonaws.com/bella_marketing.jpg",
+      username: "bella_marketing",
+      id: 2,
+      createdAt: "",
+      email: "",
+    }, content: "Congrats Alice! So proud of you!", createdAt: "1h ago"}, {id: 2, author: {
+      name: "Diana Lopez",
+      role: "Branding Specialist",
+      profileUrl: "https://wansati.s3.ap-southeast-2.amazonaws.com/diana_branding.jpg",
+      username: "diana_branding",
+      id: 4,
+      createdAt: "",
+      email: "",
+    }, content: "Well deserved! Keep shining! ✨", createdAt: "2h ago"}],
     createdAt: "2h ago",
   },
   {
@@ -48,7 +57,7 @@ const mockFeed: Post[] = [
       "Our company just opened remote roles in Kenya and Mauritius 🇰🇪🇲🇺 — full-stack, marketing, and design. Happy to refer Wansati sisters first!",
     image: "https://wansati.s3.ap-southeast-2.amazonaws.com/backdrop.jpg",
     likes: 73,
-    comments: 22,
+    comments: [],
     createdAt: "5h ago",
   },
 ];
@@ -56,6 +65,10 @@ const mockFeed: Post[] = [
 export default function FeedPage() {
   const [posts, setPosts] = useState<Post[]>(mockFeed);
   const [newPost, setNewPost] = useState("");
+  const [selectedPost, setSelectedPost] = useState<Post>();
+  const [openComments, setOpenComments] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<SafeUser>();
+  const [openProfile, setOpenProfile] = useState(false);
 
   const handlePost = () => {
     if (!newPost.trim()) return;
@@ -72,12 +85,38 @@ export default function FeedPage() {
       },
       content: newPost,
       likes: 0,
-      comments: 0,
+      comments: [],
       createdAt: "Just now",
     };
     setPosts([temp, ...posts]);
     setNewPost("");
   };
+
+    const handleNewComment = (content: string) => {
+    if (!selectedPost) return;
+
+    setPosts((prevPosts) =>
+      prevPosts.map((post) => {
+        if (post.id === selectedPost.id) {
+          const newComment: PostComment = {
+            id: Date.now(),
+            author: {
+              id: 1, // replace with current user id
+              name: "You", // replace with current user name
+              username: "current.user",
+              profileUrl: "/images/avatars/default.png",
+              createdAt: new Date().toISOString(),
+              email: "",
+              role: "Member",
+            },
+            content,
+            createdAt: "Just now",
+          };
+          return { ...post, comments: [...post.comments, newComment] };
+        }
+        return post;
+      })
+    );}
 
   return (
     <main className="min-h-screen bg-[#FAF8FD] flex justify-center p-4">
@@ -124,7 +163,7 @@ export default function FeedPage() {
             transition={{ duration: 0.3 }}
             className="bg-white rounded-2xl shadow-sm p-5 mb-5"
           >
-            <div className="flex items-center gap-3 mb-3">
+            <div className="flex items-center gap-3 mb-3" onClick={()=>{setSelectedUser(post.author); setOpenProfile(true);}}>
               <Image
                 src={post.author.profileUrl || "https://via.placeholder.com/150"}
                 alt={post.author.name}
@@ -163,8 +202,8 @@ export default function FeedPage() {
               <button className="flex items-center gap-1 hover:text-purple-700">
                 <Heart className="w-4 h-4" /> {post.likes}
               </button>
-              <button className="flex items-center gap-1 hover:text-purple-700">
-                <MessageCircle className="w-4 h-4" /> {post.comments}
+              <button className="flex items-center gap-1 hover:text-purple-700" onClick={()=>{setSelectedPost(post); setOpenComments(true);}}>
+                <MessageCircle className="w-4 h-4" /> {post.comments.length}
               </button>
               <button className="flex items-center gap-1 hover:text-purple-700">
                 <Send className="w-4 h-4" />
@@ -173,6 +212,25 @@ export default function FeedPage() {
           </motion.article>
         ))}
       </div>
+
+        {/* PROFILE MODAL */}
+        {selectedUser && (
+          <ProfileModal
+            isOpen={openProfile}
+            onClose={() => setOpenProfile(false)}
+            user={selectedUser}
+          />
+        )}
+
+        {/* COMMENTS MODAL */}
+        {selectedPost && (
+          <CommentsModal
+            comments={selectedPost?.comments}
+            isOpen={openComments}
+            onClose={() => setOpenComments(false)}
+            onAddComment={handleNewComment}
+          />
+        )}
     </main>
   );
 }
