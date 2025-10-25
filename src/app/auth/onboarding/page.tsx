@@ -10,21 +10,21 @@ const onboardingSteps = [
 id: 1,
 title: "Welcome to Wansati 🌸",
 subtitle: "Your sisterhood for growth, mentorship, and career opportunities.",
-image: "/images/onboarding/welcome.png",
+image: "/onboarding_image0.png",
 },
 {
 id: 2,
 title: "Swipe & Connect",
 subtitle:
 "Meet mentors, peers, and mentees who understand your journey.",
-image: "/images/onboarding/swipe.png",
+image: "/onboariding_image1.png",
 },
 {
 id: 3,
 title: "Discover Jobs & Insights",
 subtitle:
 "Find opportunities, check company ratings, and explore salary insights.",
-image: "/images/onboarding/jobs.png",
+image: "/onboarding_image2.png",
 },
 {
 id: 4,
