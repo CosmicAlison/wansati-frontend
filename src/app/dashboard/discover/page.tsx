@@ -153,7 +153,7 @@ export default function DiscoverPage() {
       </h2>
 
       {/* Horizontal scroll of matches */}
-      <div className="flex overflow-x-auto gap-4 pb-2 no-scrollbar">
+      <div className="flex overflow-x-auto gap-4 pb-2 no-scrollbar px-2 py-2">
         {mockProfiles.map((user) => (
           <div
             key={user.id}
@@ -161,7 +161,7 @@ export default function DiscoverPage() {
               setSelectedUser(user);
               setOpenProfile(true);
             }}
-            className="flex flex-col items-center cursor-pointer"
+            className="flex flex-col items-center cursor-pointer flex-shrink-0"
           >
             <div className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-[var(--dark-purple)] hover:ring-purple-600 transition-all relative">
               <Image
