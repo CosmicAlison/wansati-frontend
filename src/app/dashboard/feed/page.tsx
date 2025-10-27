@@ -163,7 +163,7 @@ export default function FeedPage() {
             transition={{ duration: 0.3 }}
             className="bg-white rounded-2xl shadow-sm p-5 mb-5"
           >
-            <div className="flex items-center gap-3 mb-3" onClick={()=>{setSelectedUser(post.author); setOpenProfile(true);}}>
+            <div className="flex items-center gap-3 mb-3" onClick={()=>{setSelectedUser(post.author); setOpenProfile(true); ()=>{setSelectedPost(undefined); setOpenComments(false);}}}>
               <Image
                 src={post.author.profileUrl || "https://via.placeholder.com/150"}
                 alt={post.author.name}
