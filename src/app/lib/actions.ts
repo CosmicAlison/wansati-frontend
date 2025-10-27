@@ -4,7 +4,7 @@ import { signIn } from '@/auth';
 export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
     //await signIn(formData);
-    
+    await fetch("/api/dev-login", { method: "GET", credentials: "include" });
     const redirectTo = formData.get("redirectTo")?.toString() || "/dashboard";
     window.location.href = redirectTo;
 
