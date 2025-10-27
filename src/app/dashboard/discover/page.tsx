@@ -119,9 +119,13 @@ export default function DiscoverPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#FAF7FD] to-[#FDFBFF] flex flex-col items-center p-6">
-      <header className="w-full max-w-3xl flex items-center justify-center mb-6">
-        <h1 className="text-xl text-center font-bold text-[var(--dark-purple)]">Discover Sisters</h1>
-        <div className="flex items-center gap-2">
+      <header className="w-full max-w-3xl flex items-center justify-between mb-6 px-4">
+        <div className="w-24"></div>
+        <h1 className="text-xl font-bold text-[var(--dark-purple)] text-center">
+          Discover Sisters
+        </h1>
+
+        <div className="flex items-center gap-4">
           <button
             onClick={() => setOpenSearch(true)}
             className="text-[var(--dark-purple)] hover:opacity-70"
@@ -129,7 +133,7 @@ export default function DiscoverPage() {
           >
             <Search className="w-5 h-5" />
           </button>
-          <button className="flex items-center gap-1 text-sm text-[var(--dark-purple)] font-medium hover:opacity-70">
+          <button className="flex items-center gap-1 text-sm font-medium text-[var(--dark-purple)] hover:opacity-70">
             <Filter className="w-4 h-4" /> Filters
           </button>
         </div>
