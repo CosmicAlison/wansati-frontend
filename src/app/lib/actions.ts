@@ -3,7 +3,7 @@ import { signIn } from '@/auth';
 
 export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
-    await signIn(formData);
+    //await signIn(formData);
     
     const redirectTo = formData.get("redirectTo")?.toString() || "/dashboard";
     window.location.href = redirectTo;
