@@ -145,36 +145,40 @@ export default function DiscoverPage() {
         </div>
       </header>
 
-      {/* MATCHES SECTION */}
-      <section className="w-full flex items-center max-w-3xl mb-6">
-        <h2 className="text-sm font-semibold text-[var(--dark-purple)] mb-3">
-          Your Matches
-        </h2>
-        <div className="flex overflow-x-auto gap-4 pb-2 no-scrollbar">
-          {mockProfiles.map((user) => (
-            <div
-              key={user.id}
-              onClick={() => {
-                setSelectedUser(user);
-                setOpenProfile(true);
-              }}
-              className="flex flex-col items-center cursor-pointer"
-            >
-              <div className="relative w-16 h-16 rounded-full overflow-hidden ring-2 ring-[var(--dark-purple)] hover:ring-purple-600 transition-all">
-                <Image
-                  src={user.profileUrl || "/images/default-avatar.png"}
-                  alt={user.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <span className="text-xs mt-2 text-gray-700 font-medium truncate w-16 text-center">
-                {user.name.split(" ")[0]}
-              </span>
+    {/* MATCHES SECTION */}
+    <section className="w-full max-w-3xl mb-6">
+      {/* Title on top */}
+      <h2 className="text-sm font-semibold text-[var(--dark-purple)] mb-3">
+        Your Matches
+      </h2>
+
+      {/* Horizontal scroll of matches */}
+      <div className="flex overflow-x-auto gap-4 pb-2 no-scrollbar">
+        {mockProfiles.map((user) => (
+          <div
+            key={user.id}
+            onClick={() => {
+              setSelectedUser(user);
+              setOpenProfile(true);
+            }}
+            className="flex flex-col items-center cursor-pointer"
+          >
+            <div className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-[var(--dark-purple)] hover:ring-purple-600 transition-all relative">
+              <Image
+                src={user.profileUrl || "/images/default-avatar.png"}
+                alt={user.name}
+                fill
+                className="object-cover w-full h-full"
+              />
             </div>
-          ))}
-        </div>
-      </section>
+            <span className="text-xs mt-2 text-gray-700 font-medium truncate w-16 text-center">
+              {user.name.split(" ")[0]}
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
+
 
       {/* DISCOVER CARD */}
       {profile && (
