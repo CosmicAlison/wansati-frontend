@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { redirect } from 'next/navigation';
 import { Sparkles, Users, Briefcase } from "lucide-react";
 
 const onboardingSteps = [
@@ -17,22 +18,15 @@ id: 2,
 title: "Swipe & Connect",
 subtitle:
 "Meet mentors, peers, and mentees who understand your journey.",
-image: "/onboariding_image1.png",
+image: "/onboarding_image1.png",
 },
 {
 id: 3,
 title: "Discover Jobs & Insights",
 subtitle:
-"Find opportunities, check company ratings, and explore salary insights.",
+"Share opportunities and explore meaningful connections.",
 image: "/onboarding_image2.png",
-},
-{
-id: 4,
-title: "Track Your Growth",
-subtitle:
-"Build your profile, track skills, and celebrate achievements.",
-image: "/images/onboarding/profile.png",
-},
+}
 ];
 
 export default function OnboardingPage() {
@@ -41,7 +35,7 @@ const step = onboardingSteps[stepIndex];
 
 const nextStep = () => {
 if (stepIndex < onboardingSteps.length - 1) setStepIndex(stepIndex + 1);
-else alert("Onboarding Complete! Redirect to dashboard.");
+else   redirect('/dashboard/discover');
 };
 
 const prevStep = () => {
