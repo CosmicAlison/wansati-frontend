@@ -1,16 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, MapPin } from "lucide-react";
-import ToggleButton from "@/components/ui/ToggleButton";
 import Button from "./Button";
 import { useUserStore } from "@/store/useUserStore";
-
-const settingsItems = [
-    {title:"Profile Visibilty", description:"Toggle on or off whether other users can see your profile.",action:(state:Boolean)=>{}},
-    {title:"Allow Matches Outside My Region", description:"Choose whether you can be matched to users outside your vicinity.",action:(state:Boolean)=>{}},
-]
-//to do: add calls to a settings service to be created that will update the settings for the user, you also need to get the settings for the user when the component loads 
-//and pass this to the toggle button as the initialState prop 
 
 export default function SettingsModal({isOpen, onClose}:any){
     const { user } = useUserStore();
