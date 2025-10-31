@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Button from "./Button";
 import { useUserStore } from "@/store/useUserStore";
 
-export default function SettingsModal({isOpen, onClose}:any){
+export default function LogoutModal({isOpen, onClose}:any){
     const { user } = useUserStore();
     return (
     <AnimatePresence>
