@@ -36,7 +36,7 @@ export default function SettingsModal({isOpen, onClose}:any){
                 Are You Sure You Want To LogOut?
               </h2>
               <p className="text-sm" >
-                Logout as {user?.email}
+                Logout as {user?.email || "user.email@gmail.com"}
               </p>
               <Button>
                 LogOut

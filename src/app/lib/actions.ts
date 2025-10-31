@@ -1,10 +1,9 @@
 
 import { signIn } from '@/auth';
-
+import { SafeUser } from '@/types/User';
 export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
-    //await signIn(formData);
-    await fetch("/api/dev-login", { method: "GET", credentials: "include" });
+    await signIn(formData);
     const redirectTo = formData.get("redirectTo")?.toString() || "/dashboard";
     window.location.href = redirectTo;
 

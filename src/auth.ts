@@ -3,7 +3,7 @@ import { get, post } from "@/lib/Api";
 import { SafeUser} from "@/types/User";
 import { useUserStore } from "@/store/useUserStore";
 
-interface AuthResponse {
+export interface AuthResponse {
   success: boolean;
   message?: string;
   data?: {
@@ -15,15 +15,15 @@ interface AuthResponse {
 export async function signIn(data: { email: string; password: string } | FormData) {
   const body =
     data instanceof FormData ? Object.fromEntries(data.entries()) : data;
-  const res = await post<AuthResponse>("/auth/login", body);
+    //const res = await post<AuthResponse>("/auth/login", body);
+    const res = await post<AuthResponse>("/dev-login", body);
 
   if (!res?.data?.user) {
     return (res?.message || "Login failed");
   }
 
   // Update user store
-  const { setUser } = useUserStore.getState();
-  setUser(res.data.user);
+  useUserStore.setState({ user: res.data.user });
 
   return;
 }

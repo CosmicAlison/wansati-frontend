@@ -1,7 +1,16 @@
 import { NextResponse } from "next/server";
 
-export async function GET() {
-  const res = NextResponse.json({ message: "Dummy login active" });
+export async function POST() {
+  const dummyUser = {
+    name: "Alice Johnson",
+    role: "Software Engineer • Johannesburg",
+    profileUrl: "https://wansati.s3.ap-southeast-2.amazonaws.com/alice_tech.jpg",
+    username: "alice_tech",
+    id: 1,
+    createdAt: "",
+    email: "alice.tech@example.com",
+  }
+  const res = NextResponse.json({ success: true, message: "Dummy login active", data: {user: dummyUser}, timestamp:"" });
   res.cookies.set({
     name: "token",
     value: "dummy12345",
