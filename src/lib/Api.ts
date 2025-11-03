@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
-
+//const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"; to do uncomment this and remove the line below
+const BASE_URL = "/api"
 
 export async function get<T>(path: string): Promise<T> {
   const res = await fetch(`${BASE_URL}${path}`, {
@@ -18,8 +18,7 @@ export async function get<T>(path: string): Promise<T> {
 }
 
 export async function post<T>(path: string, body: any): Promise<T> {
-  //const res = await fetch(`${BASE_URL}${path}`, {
-  const res = await fetch(`${path}`, {
+  const res = await fetch(`${BASE_URL}${path}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
