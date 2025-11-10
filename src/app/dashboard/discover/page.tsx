@@ -17,6 +17,7 @@ const mockProfiles: SafeUser[] = [
       role: "Marketing Associate",
       location: "New York",
       bio: "Digital marketer with a focus on SEO and content strategy.",
+      interests: [{ id: 2, name: "SEO"}, {id: 3, name:"Branding Strategies"}], 
       profileUrl: "https://wansati.s3.ap-southeast-2.amazonaws.com/bella_marketing.jpg",
       createdAt: "",
     },
@@ -29,6 +30,7 @@ const mockProfiles: SafeUser[] = [
       role: "Backend Developer",
       location: "Austin",
       bio: "Backend engineer specialized in Node.js and database design.",
+      interests: [{ id: 1, name: "SOLID Architecture"}, {id: 4, name:"Contemporary Literature"}], 
       profileUrl: "https://wansati.s3.ap-southeast-2.amazonaws.com/carla_backend.jpg",
     }
   ]; 
@@ -48,6 +50,7 @@ export default function DiscoverPage() {
       role: "Branding Specialist",
       location: "Los Angeles",
       bio: "Brand strategist and creative designer with a focus on visual identity.",
+      interests: [{ id: 5, name: "Knitting"}, {id: 6, name:"Pottery"}], 
       profileUrl: "https://wansati.s3.ap-southeast-2.amazonaws.com/diana_branding.jpg",
     },
     {
@@ -59,6 +62,7 @@ export default function DiscoverPage() {
       role: "Frontend Engineer",
       location: "Seattle",
       bio: "Frontend developer with expertise in React, Vue, and UI/UX design.",
+      interests: [{ id: 7, name: "Vue.js"}, {id: 8, name:"Career Growth"}], 
       profileUrl: "https://wansati.s3.ap-southeast-2.amazonaws.com/emma_frontend.jpg",
     },
   ]);
